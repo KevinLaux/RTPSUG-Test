@@ -34,10 +34,6 @@ jobs:
           New-Item -Path $filePath -Force -Value $events
           Write-Output $BranchName
           .\script.ps1 -BranchName $branchName -FilePath $filePath
-          git checkout -b $branchName
-          git add $filePath
-          git commit -m "Add events for $date"
-          git push origin $branchName
           
       - name: Commit changes
         run: |
