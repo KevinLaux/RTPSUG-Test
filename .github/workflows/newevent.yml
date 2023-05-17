@@ -33,6 +33,7 @@ jobs:
         run: |
           $branchName = "${{ github.ref }}"
           $branchName = $branchName -replace 'refs/heads/', ''
+          Write-Output $BranchName
           .\script.ps1 -BranchName $branchName
           
       - name: Create and commit file
