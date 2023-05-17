@@ -36,9 +36,3 @@ jobs:
           Write-Output $BranchName
           .\script.ps1 -BranchName $branchName
           
-      - name: Create and commit file
-        run: |
-          git checkout -b $branchName
-          git add $filePath
-          git commit -m "Add events for $date"
-          git push origin $branchName
