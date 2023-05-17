@@ -1,5 +1,4 @@
 name: Fetch and store scheduled events
-name: Run PowerShell script on branch create
 on:
   create:
     branches:
