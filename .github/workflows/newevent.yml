@@ -39,3 +39,8 @@ jobs:
           git commit -m "Add events for $date"
           git push origin $branchName
           
+      - name: Commit changes
+        run: |
+          git add .
+          git commit -m "Commit message"
+          git push
