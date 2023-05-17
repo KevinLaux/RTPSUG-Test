@@ -1,24 +1,19 @@
-name: Fetch and store scheduled events
-on:
-  create:
-    branches:
-      - '*'
 #on:
 #  schedule:
 #    - cron: '0 0 * * *'  # Runs every day at midnight UTC
 
+name: Run PowerShell script on branch create
+on:
+  create:
+    branches:
+      - '*'
+
 jobs:
-  fetch_and_store_events:
-    runs-on: ubuntu-latest
-    
+  run-script:
+    runs-on: windows-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-        
-      - name: Set up PowerShell
-        uses: actions/setup-powershell@v1
-        with:
-          pwsh-version: '7.x'
           
       - name: Fetch events from Sessionize.com API
         run: |
@@ -33,6 +28,14 @@ jobs:
           $branchName = "events/$date"
           $filePath = "meetings/$year/$month/$date.json"
           New-Item -Path $filePath -Force -Value $events
+          shell: pwsh
+          
+      - name: Run PowerShell script
+        run: |
+          $branchName = "${{ github.ref }}"
+          $branchName = $branchName -replace 'refs/heads/', ''
+          .\script.ps1 -BranchName $branchName
+        shell: pwsh
           
       - name: Create and commit file
         run: |
