@@ -28,7 +28,6 @@ jobs:
           $branchName = "events/$date"
           $filePath = "meetings/$year/$month/$date.json"
           New-Item -Path $filePath -Force -Value $events
-          shell: pwsh
           
       - name: Run PowerShell script
         run: |
@@ -36,7 +35,6 @@ jobs:
           $branchName = $branchName -replace 'refs/heads/', ''
           set-location RTPSUG-Test
           .\script.ps1 -BranchName $branchName
-        shell: pwsh
           
       - name: Create and commit file
         run: |
