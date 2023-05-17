@@ -28,11 +28,6 @@ jobs:
           $branchName = "events/$date"
           $filePath = "meetings/$year/$month/$date.json"
           New-Item -Path $filePath -Force -Value $events
-          
-      - name: Run PowerShell script
-        run: |
-          $branchName = "${{ github.ref }}"
-          $branchName = $branchName -replace 'refs/heads/', ''
           Write-Output $BranchName
-          .\script.ps1 -BranchName $branchName
+          .\script.ps1 -BranchName $branchName -FilePath $filePath
           
