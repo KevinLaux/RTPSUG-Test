@@ -33,7 +33,6 @@ jobs:
         run: |
           $branchName = "${{ github.ref }}"
           $branchName = $branchName -replace 'refs/heads/', ''
-          set-location RTPSUG-Test
           .\script.ps1 -BranchName $branchName
           
       - name: Create and commit file
